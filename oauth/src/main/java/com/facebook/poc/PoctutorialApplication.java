@@ -22,14 +22,28 @@ public class PoctutorialApplication  extends WebSecurityConfigurerAdapter {
 	}
 
 	public static void main(String[] args) {
+		//set proxy information if you are behind a firewall
+/*		String proxyurl = "proxyurl";
+		String proxyport = "proxyport";
+		String proxyusername = "proxyusername";
+		String proxypassword = "proxypassword";
+		
+		System.getProperties().put("http.proxyHost", proxyurl);
+		System.getProperties().put("http.proxyPort", proxyport);
+		System.getProperties().put("http.proxyUser", proxyusername);
+		System.getProperties().put("http.proxyPassword", proxypassword);
+		System.getProperties().put("https.proxyHost", proxyurl);
+		System.getProperties().put("https.proxyPort", proxyport);
+		System.getProperties().put("https.proxyUser", proxyusername);
+		System.getProperties().put("https.proxyPassword", proxypassword);*/
 		SpringApplication.run(PoctutorialApplication.class, args);
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.antMatcher("/**").authorizeRequests().antMatchers("/", "/login**", "/webjars/**").permitAll().anyRequest()
-				.authenticated().and().logout().logoutSuccessUrl("/").permitAll();
-				//.and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());;
+				.authenticated().and().logout().logoutSuccessUrl("/").permitAll()
+				.and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());;
 	}
 	
 
